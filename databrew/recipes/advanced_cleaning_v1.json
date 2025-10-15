@@ -1,0 +1,310 @@
+[
+  {
+    "Action": {
+      "Operation": "FILL_WITH_CUSTOM",
+      "Parameters": {
+        "columnDataType": "string",
+        "sourceColumn": "review_text",
+        "value": "Unknown"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_CUSTOM",
+      "Parameters": {
+        "columnDataType": "string",
+        "sourceColumn": "rt_norm",
+        "value": "Unknown"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "n_votes"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "book_id"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "publication_year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_VALUES",
+      "Parameters": {
+        "sourceColumn": "review_char_count"
+      }
+    },
+    "ConditionExpressions": [
+      {
+        "Condition": "LESS_THAN",
+        "Value": "10",
+        "TargetColumn": "review_char_count"
+      }
+    ]
+  },
+  {
+    "Action": {
+      "Operation": "DELETE_DUPLICATE_ROWS",
+      "Parameters": {
+        "duplicateRowsCount": "0"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_DUPLICATES",
+      "Parameters": {
+        "sourceColumn": "review_id"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_DUPLICATES",
+      "Parameters": {
+        "sourceColumn": "review_text"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REPLACE_TEXT",
+      "Parameters": {
+        "pattern": "http\\S+",
+        "sourceColumn": "review_text",
+        "value": " "
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REPLACE_TEXT",
+      "Parameters": {
+        "pattern": "[^a-zA-Z0-9\\s]",
+        "sourceColumn": "review_text",
+        "value": " "
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_WHITESPACE",
+      "Parameters": {
+        "endPosition": "NaN",
+        "functionStepType": "REMOVE_WHITESPACE",
+        "ignoreCase": "false",
+        "sourceColumn": "review_text",
+        "startPosition": "NaN",
+        "targetColumn": "review_text_TWS"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "YEAR",
+      "Parameters": {
+        "functionStepType": "YEAR",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_year",
+        "units": "year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "YEAR",
+      "Parameters": {
+        "functionStepType": "YEAR",
+        "sourceColumn": "date_added",
+        "targetColumn": "date_added_year",
+        "units": "year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_year\",\"date_added_year\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "([0-9]{4})",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_year\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "([1-2][0-9]{3})",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "([A-Z][a-z]{2})",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "RENAME",
+      "Parameters": {
+        "sourceColumn": "review_month",
+        "targetColumn": "review_Day"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "[A-Z][a-z]{2}\\s([A-Z][a-z]{2})",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_Day\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_month\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "^[A-Za-z]{3}\\s([A-Za-z]{3})",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_month\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "^[A-Za-z]{3}\\s([A-Za-z]{3})\\s",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_month\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "MONTH",
+      "Parameters": {
+        "functionStepType": "MONTH",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month",
+        "units": "month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "DELETE",
+      "Parameters": {
+        "sourceColumns": "[\"review_month\"]"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "EXTRACT_PATTERN",
+      "Parameters": {
+        "pattern": "^[A-Za-z]{3}\\s([A-Za-z]{3})\\s[0-9]{1,2}\\s",
+        "sourceColumn": "date_added",
+        "targetColumn": "review_month"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "CHANGE_DATA_TYPE",
+      "Parameters": {
+        "columnDataType": "integer",
+        "sourceColumn": "review_year"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_VALUES",
+      "Parameters": {
+        "sourceColumn": "review_year"
+      }
+    },
+    "ConditionExpressions": [
+      {
+        "Condition": "LESS_THAN",
+        "Value": "2014",
+        "TargetColumn": "review_year"
+      }
+    ]
+  }
+]
