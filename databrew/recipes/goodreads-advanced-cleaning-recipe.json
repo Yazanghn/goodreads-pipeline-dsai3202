@@ -1,0 +1,38 @@
+[
+  {
+    "Action": {
+      "Operation": "FILL_WITH_CUSTOM",
+      "Parameters": {
+        "columnDataType": "string",
+        "sourceColumn": "review_text",
+        "value": "Unknown"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_CUSTOM",
+      "Parameters": {
+        "columnDataType": "string",
+        "sourceColumn": "rt_norm",
+        "value": "Unknown"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "review_char_count"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "FILL_WITH_MEDIAN",
+      "Parameters": {
+        "sourceColumn": "publication_year"
+      }
+    }
+  }
+]
