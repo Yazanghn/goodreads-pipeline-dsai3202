@@ -1,0 +1,61 @@
+[
+  {
+    "Action": {
+      "Operation": "REMOVE_VALUES",
+      "Parameters": {
+        "sourceColumn": "review_char_count"
+      }
+    },
+    "ConditionExpressions": [
+      {
+        "Condition": "LESS_THAN",
+        "Value": "10",
+        "TargetColumn": "review_char_count"
+      }
+    ]
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_DUPLICATES",
+      "Parameters": {
+        "sourceColumn": "review_id"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REMOVE_DUPLICATES",
+      "Parameters": {
+        "sourceColumn": "review_text"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "LOWER_CASE",
+      "Parameters": {
+        "sourceColumn": "review_text"
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REPLACE_TEXT",
+      "Parameters": {
+        "pattern": "http\\S+",
+        "sourceColumn": "review_text",
+        "value": " "
+      }
+    }
+  },
+  {
+    "Action": {
+      "Operation": "REPLACE_TEXT",
+      "Parameters": {
+        "pattern": "[^a-zA-Z0-9\\s]",
+        "sourceColumn": "review_text",
+        "value": " "
+      }
+    }
+  }
+]
