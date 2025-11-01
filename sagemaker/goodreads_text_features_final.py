@@ -319,14 +319,14 @@ def main():
 
         # Select subset and process
         print("---- Filtering for specific columns ----")
-        df_trial = df.head(500).copy()
+        df_trial = df.copy()
         df_trial = filter_columns(df_trial)
         print(f"Columns after filtering: {list(df_trial.columns)}", flush=True)
 
         # Feature pipeline
         print("---- Feature Engineering Pipeline ----")
         out_df = process_chunk(df_trial)
-        write_out(out_df, base_name="features_enriched_trial500")
+        write_out(out_df, base_name="features_enriched_full")
 
         print("------ PROCESSING AND EMBEDDING SUCCESS ------", flush=True)
 
